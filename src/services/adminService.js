@@ -1,0 +1,23 @@
+import { api } from './api'
+export const adminService = {
+  getUsers: async (params) => (await api.get('/api/admin/users', { params })).data,
+  addUser: async (data) => (await api.post('/api/admin/users', data)).data,
+  suspendUser: async (userId) => (await api.put('/api/admin/users/' + userId + '/suspend')).data,
+  creditUser: async (userId, amount) => (await api.post('/api/admin/users/' + userId + '/credit', { amount })).data,
+  debitUser: async (userId, amount) => (await api.post('/api/admin/users/' + userId + '/debit', { amount })).data,
+  approveReferral: async (referralId) => (await api.put('/api/admin/referrals/' + referralId + '/approve')).data,
+  getTasks: async () => (await api.get('/api/admin/tasks')).data,
+  createTask: async (data) => (await api.post('/api/admin/tasks', data)).data,
+  updateTask: async (taskId, data) => (await api.put('/api/admin/tasks/' + taskId, data)).data,
+  deleteTask: async (taskId) => (await api.delete('/api/admin/tasks/' + taskId)).data,
+  getMMFPlans: async () => (await api.get('/api/admin/mmf/plans')).data,
+  toggleMMFPlan: async (planId) => (await api.put('/api/admin/mmf/plans/' + planId + '/toggle')).data,
+  updateMMFPlan: async (planId, data) => (await api.put('/api/admin/mmf/plans/' + planId, data)).data,
+  getPendingWithdrawals: async () => (await api.get('/api/admin/withdrawals/pending')).data,
+  approveWithdrawal: async (id, data) => (await api.put('/api/admin/withdrawals/' + id + '/approve', data)).data,
+  rejectWithdrawal: async (id, reason) => (await api.put('/api/admin/withdrawals/' + id + '/reject', { reason })).data,
+  getRevenueReport: async (params) => (await api.get('/api/admin/reports/revenue', { params })).data,
+  getPlatformStats: async () => (await api.get('/api/admin/stats')).data,
+  getFraudFlags: async () => (await api.get('/api/admin/fraud/flags')).data,
+  investigateUser: async (userId) => (await api.get('/api/admin/fraud/investigate/' + userId)).data,
+}
