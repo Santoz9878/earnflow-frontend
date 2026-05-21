@@ -22,7 +22,7 @@ const LiveFeed = () => {
         <div className="overflow-hidden whitespace-nowrap">
           <div className="animate-marquee inline-flex space-x-8">
             {[...feed, ...feed].map((item, index) => (
-              <span key={index} className="text-sm text-gray-400">{item.message} • </span>
+              <span key={index} className="text-sm text-gray-400">{item.message} - </span>
             ))}
           </div>
         </div>

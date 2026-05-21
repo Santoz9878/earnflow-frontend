@@ -129,7 +129,7 @@ const EarnHub = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <div className="flex items-center space-x-3 mb-6">
             <div className="w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center">{getDayIcon(todaySchedule.icon)}</div>
-            <div><h2 className="text-xl font-bold text-white">{todaySchedule.title}</h2><p className="text-gray-400 text-sm">{todaySchedule.totalTasks} tasks � Ksh {todaySchedule.rewardPerTask} each</p></div>
+            <div><h2 className="text-xl font-bold text-white">{todaySchedule.title}</h2><p className="text-gray-400 text-sm">{todaySchedule.totalTasks} tasks - Ksh {todaySchedule.rewardPerTask} each</p></div>
           </div>
           <div className="space-y-4">
             {todaySchedule.tasks.map((task, index) => {
@@ -142,7 +142,7 @@ const EarnHub = () => {
                     <div className={'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ' + (completed ? 'bg-emerald-500/20' : 'bg-gray-800')}>
                       {completed ? <CheckCircle size={20} className="text-emerald-400" /> : getDayIcon(todaySchedule.icon)}
                     </div>
-                    <div><h3 className="text-white font-semibold">{task.title}</h3><p className="text-gray-400 text-sm">{task.type === 'video' ? task.platform + ' video � ' + task.duration + 's' : task.type === 'ad' ? task.duration + 's view' : task.type === 'trivia' ? (task.questions || 5) + ' questions' : 'Survey'}</p></div>
+                    <div><h3 className="text-white font-semibold">{task.title}</h3><p className="text-gray-400 text-sm">{task.type === 'video' ? task.platform + ' video - ' + task.duration + 's' : task.type === 'ad' ? task.duration + 's view' : task.type === 'trivia' ? (task.questions || 5) + ' questions' : 'Survey'}</p></div>
                   </div>
                   <div className="flex items-center space-x-3 flex-shrink-0">
                     <span className="text-emerald-400 font-bold">{formatCurrency(task.reward)}</span>
