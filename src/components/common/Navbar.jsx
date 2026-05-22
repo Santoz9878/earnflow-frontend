@@ -27,9 +27,11 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <DollarSign size={20} className="text-white" />
-              </div>
+              <img
+                src="https://chatgpt.com/s/m_6a12c9a8a02c819193347e7467579215"
+                alt="EarnFlow logo"
+                className="w-8 h-8 rounded-lg object-cover"
+              />
               <span className="text-xl font-bold text-white">EarnFlow</span>
             </Link>
           </div>
