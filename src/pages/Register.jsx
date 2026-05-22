@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { register, reset } from '../redux/slices/authSlice'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Eye, EyeOff, Gift, UserPlus, DollarSign, Phone } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, Gift, UserPlus, Phone } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { validateEmail, validatePassword } from '../utils/validators'
 import { authService } from '../services/authService'
@@ -48,9 +48,7 @@ const Register = () => {
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30">
-              <DollarSign size={24} className="text-white" />
-            </div>
+            <img src="/logo.png" alt="EarnFlow" className="w-10 h-10 rounded-2xl shadow-lg shadow-blue-600/30 object-cover" />
             <span className="text-2xl font-bold text-white">EarnFlow</span>
           </Link>
         </div>

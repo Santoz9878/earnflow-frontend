@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
-import { DollarSign } from 'lucide-react'
 
 const Footer = () => (
   <footer className="bg-gray-900 border-t border-gray-800 py-8 mt-auto">
     <div className="max-w-7xl mx-auto px-4 text-center">
       <div className="flex items-center justify-center space-x-2 mb-4">
-        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-          <DollarSign size={20} className="text-white" />
-        </div>
+        <img src="/logo.png" alt="EarnFlow" className="w-8 h-8 rounded-lg object-cover" />
         <span className="text-lg font-bold text-white">EarnFlow</span>
       </div>
       <p className="text-gray-500">&copy; {new Date().getFullYear()} EarnFlow. All rights reserved.</p>

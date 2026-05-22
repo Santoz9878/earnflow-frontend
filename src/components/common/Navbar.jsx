@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/dashboard" className="flex items-center space-x-2">
               <img
-                src="https://chatgpt.com/s/m_6a12c9a8a02c819193347e7467579215"
+                src="/logo.png"
                 alt="EarnFlow logo"
                 className="w-8 h-8 rounded-lg object-cover"
               />

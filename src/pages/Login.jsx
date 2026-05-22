@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, reset } from '../redux/slices/authSlice'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Eye, EyeOff, LogIn, DollarSign } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { validateEmail } from '../utils/validators'
 import toast from 'react-hot-toast'
@@ -37,9 +37,7 @@ const Login = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30">
-              <DollarSign size={28} className="text-white" />
-            </div>
+            <img src="/logo.png" alt="EarnFlow" className="w-12 h-12 rounded-2xl shadow-lg shadow-blue-600/30 object-cover" />
             <span className="text-2xl font-bold text-white">EarnFlow</span>
           </Link>
         </div>

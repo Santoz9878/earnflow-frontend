@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { DollarSign, Lock } from 'lucide-react'
+import { Lock } from 'lucide-react'
 
 const Landing = () => {
   return (
@@ -15,9 +15,12 @@ const Landing = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-          className="w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-600/30"
         >
-          <DollarSign size={48} className="text-white" />
+          <img 
+            src="/logo.png" 
+            alt="EarnFlow Logo" 
+            className="w-24 h-24 rounded-3xl mx-auto mb-6 shadow-2xl shadow-blue-600/30 object-cover"
+          />
         </motion.div>
 
         <motion.h1 

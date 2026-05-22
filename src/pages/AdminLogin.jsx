@@ -38,9 +38,7 @@ const AdminLogin = () => {
         className="w-full max-w-md"
       >
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-amber-600 to-amber-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-600/30">
-            <Shield size={32} className="text-white" />
-          </div>
+          <img src="/logo.png" alt="Admin" className="w-16 h-16 rounded-2xl mx-auto mb-4 shadow-lg shadow-amber-600/30 object-cover" />
           <h1 className="text-2xl font-bold text-white">Admin Portal</h1>
           <p className="text-gray-400 text-sm mt-1">Restricted access</p>
         </div>
