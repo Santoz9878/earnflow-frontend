@@ -6,10 +6,12 @@ import toast from 'react-hot-toast'
 const ReferralCard = ({ promoCode, stats }) => {
   const [copied, setCopied] = useState(false)
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(promoCode || 'LOADING')
+  const referralLink = (promoCode) ? `${window.location.origin}/register?ref=${promoCode}` : ''
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text || promoCode || 'LOADING')
     setCopied(true)
-    toast.success('Promo code copied!')
+    toast.success('Copied to clipboard!')
     setTimeout(() => setCopied(false), 2000)
   }
 
@@ -22,11 +24,18 @@ const ReferralCard = ({ promoCode, stats }) => {
           <p className="text-sm text-gray-400">Earn Ksh 200 per referral</p>
         </div>
       </div>
-      <div className="bg-gray-950 rounded-xl p-4 flex items-center justify-between mb-4">
-        <span className="text-2xl font-bold text-white tracking-wider">{promoCode || 'LOADING'}</span>
-        <button onClick={handleCopy} className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-all">
-          {copied ? <Check size={18} /> : <Copy size={18} />}<span>{copied ? 'Copied!' : 'Copy'}</span>
-        </button>
+      <div className="bg-gray-950 rounded-xl p-4 mb-4">
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-bold text-white tracking-wider">{promoCode || 'LOADING'}</span>
+          <button onClick={() => handleCopy(promoCode)} className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-all">
+            {copied ? <Check size={18} /> : <Copy size={18} />}<span>{copied ? 'Copied!' : 'Copy'}</span>
+          </button>
+        </div>
+        <div className="mt-3 text-sm text-gray-400">Share this link to invite friends:</div>
+        <div className="mt-2 flex items-center space-x-2">
+          <input readOnly value={referralLink} className="flex-1 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-sm text-gray-200" />
+          <button onClick={() => handleCopy(referralLink)} className="px-3 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-lg text-white text-sm">Copy Link</button>
+        </div>
       </div>
       {stats && (
         <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-700">

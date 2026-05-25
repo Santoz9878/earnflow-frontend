@@ -58,7 +58,8 @@ Configure via environment variable `VITE_API_URL`
 {
   "email": "newuser@example.com",
   "password": "password123",
-  "password_confirmation": "password123"
+  "password_confirmation": "password123",
+  "referral_code": "DEMO123" // optional - include to credit referrer
 }
 ```
 
@@ -74,6 +75,14 @@ Configure via environment variable `VITE_API_URL`
     "balance": 0
   }
 }
+
+**Notes:**
+- The registration endpoint accepts an optional `referral_code` (string). If provided and valid, the server should:
+  - link the new user to the referring user
+  - store a pending referral bonus that will be credited once the referred user completes required validation (e.g., email verification or first payment)
+  - include a field `referred_by` in the created user response when applicable
+
+Alternatively, referrals may be supplied via a registration URL query parameter `/register?ref=DEMO123` — the frontend will forward this as `referral_code` in the request body.
 ```
 
 ### Forgot Password

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { ArrowUpRight, ArrowDownRight, Plus, Minus } from 'lucide-react'
 import { fetchBalance, fetchTransactions } from '../redux/slices/walletSlice'
 import { formatCurrency, formatDate } from '../utils/formatCurrency'
 import LoadingSpinner from '../components/common/LoadingSpinner'
@@ -13,10 +13,10 @@ const WalletPage = () => {
   useEffect(() => { dispatch(fetchBalance()); dispatch(fetchTransactions({ page: 1, limit: 20 })) }, [dispatch])
   if (isLoading) return <LoadingSpinner />
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8"><h1 className="text-2xl lg:text-3xl font-bold text-white">Wallet</h1></motion.div>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card bg-gradient-to-br from-blue-600 to-blue-900 mb-8">
-        <div className="flex justify-between items-center"><div><p className="text-blue-200 text-sm">Balance</p><h2 className="text-4xl font-bold text-white">{formatCurrency(balance)}</h2></div><Link to="/dashboard/withdraw" className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold">Withdraw</Link></div>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"><div><p className="text-blue-200 text-sm">Balance</p><h2 className="text-4xl font-bold text-white">{formatCurrency(balance)}</h2></div><div className="flex gap-2 w-full sm:w-auto"><Link to="/dashboard/topup" className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors flex-1 sm:flex-initial"><Plus size={20} />Top Up</Link><Link to="/dashboard/withdraw" className="flex items-center justify-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors flex-1 sm:flex-initial"><Minus size={20} />Withdraw</Link></div></div>
       </motion.div>
       <div className="card"><h3 className="text-lg font-semibold text-white mb-4">Transactions</h3>
         {transactions?.length === 0 ? <p className="text-gray-400 text-center py-6">No transactions</p> : (

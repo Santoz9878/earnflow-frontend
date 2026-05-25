@@ -14,6 +14,7 @@ import MMFHistory from './pages/MMFHistory'
 import Referrals from './pages/Referrals'
 import WalletPage from './pages/Wallet'
 import Withdraw from './pages/Withdraw'
+import TopUp from './pages/TopUp'
 import Profile from './pages/Profile'
 import Leaderboard from './pages/Leaderboard'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -52,6 +53,7 @@ function App() {
           <Route path="/dashboard/referrals" element={<Referrals />} />
           <Route path="/dashboard/wallet" element={<WalletPage />} />
           <Route path="/dashboard/withdraw" element={<Withdraw />} />
+          <Route path="/dashboard/topup" element={<TopUp />} />
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/leaderboard" element={<Leaderboard />} />
         </Route>

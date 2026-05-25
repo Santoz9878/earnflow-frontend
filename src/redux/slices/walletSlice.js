@@ -31,6 +31,10 @@ export const requestWithdrawal = createAsyncThunk('wallet/requestWithdrawal', as
   return { new_balance: 1450 - data.amount, message: 'Withdrawal submitted' }
 })
 
+export const requestTopUp = createAsyncThunk('wallet/requestTopUp', async (data) => {
+  return { new_balance: 1450 + data.amount, message: 'Top-up submitted' }
+})
+
 export const fetchWithdrawals = createAsyncThunk('wallet/fetchWithdrawals', async () => {
   return [
     { id: 1, amount: 1000, status: 'processed', created_at: new Date(Date.now() - 172800000).toISOString() },
@@ -45,6 +49,7 @@ const walletSlice = createSlice({
     builder.addCase(fetchBalance.fulfilled, (s, a) => { s.balance = a.payload.balance })
     builder.addCase(fetchTransactions.fulfilled, (s, a) => { s.transactions = a.payload })
     builder.addCase(requestWithdrawal.fulfilled, (s, a) => { s.balance = a.payload.new_balance })
+    builder.addCase(requestTopUp.fulfilled, (s, a) => { s.balance = a.payload.new_balance })
     builder.addCase(fetchWithdrawals.fulfilled, (s, a) => { s.withdrawals = a.payload })
   },
 })
