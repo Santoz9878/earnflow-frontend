@@ -1,20 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { authService } from '../../services/authService'
 
-// FAKE USER FOR TESTING - REMOVE THIS IN PRODUCTION
-const fakeUser = {
-  id: 1,
-  email: 'demo@earnflow.com',
-  promo_code: 'DEMO123',
-  is_admin: true,
-  is_agent: false,
-  balance: 100,
-}
-const fakeToken = 'fake-token-for-testing'
+// Load persisted auth from localStorage
+const storedUser = (() => { try { const u = localStorage.getItem('user'); return u ? JSON.parse(u) : null } catch { return null } })()
+const storedToken = localStorage.getItem('token') || null
 
 const initialState = {
-  user: fakeUser, // Auto-logged in as demo user
-  token: fakeToken,
+  user: storedUser,
+  token: storedToken,
   isLoading: false,
   isError: false,
   message: '',

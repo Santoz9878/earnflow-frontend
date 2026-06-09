@@ -73,7 +73,13 @@ const EarnHub = () => {
     setTriviaAnswers({}); setTriviaSubmitted(false)
   }
 
-  const isCompleted = (taskId) => completedTasks?.includes(taskId)
+  const isCompleted = (taskId) => {
+    // Check both API-returned completed tasks and local state
+    if (completedTasks?.includes(taskId)) return true
+    // Also check todayTasks from API which have completed field
+    const apiTask = todayTasks?.find(t => t.id === taskId)
+    return apiTask?.completed === true
+  }
   const dailyLimitReached = (todayEarnings || 0) >= DAILY_EARNING_LIMIT
 
   const getDayIcon = (iconName) => {

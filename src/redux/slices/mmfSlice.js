@@ -1,46 +1,48 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { api } from '../../services/api'
 
 const initialState = {
-  plans: [
-    { id: 1, name: 'Bronze', min_invest: 500, max_invest: 5000, return_percent: 10, duration_type: '24h', is_active: true },
-    { id: 2, name: 'Silver', min_invest: 1000, max_invest: 10000, return_percent: 20, duration_type: '48h', is_active: true },
-    { id: 3, name: 'Gold', min_invest: 5000, max_invest: 50000, return_percent: 30, duration_type: 'weekly', is_active: true },
-  ],
-  investments: [
-    { id: 1, plan_name: 'Bronze', amount: 500, return_percent: 10, status: 'active', start_date: new Date().toISOString(), maturity_date: new Date(Date.now() + 86400000).toISOString(), duration_type: '24h' },
-  ],
-  activeInvestments: [
-    { id: 1, plan_name: 'Bronze', amount: 500, return_percent: 10, status: 'active', start_date: new Date().toISOString(), maturity_date: new Date(Date.now() + 86400000).toISOString(), duration_type: '24h' },
-  ],
+  plans: [],
+  investments: [],
+  activeInvestments: [],
   isLoading: false,
 }
 
-export const fetchPlans = createAsyncThunk('mmf/fetchPlans', async () => {
-  return [
-    { id: 1, name: 'Bronze', min_invest: 500, max_invest: 5000, return_percent: 10, duration_type: '24h', is_active: true },
-    { id: 2, name: 'Silver', min_invest: 1000, max_invest: 10000, return_percent: 20, duration_type: '48h', is_active: true },
-    { id: 3, name: 'Gold', min_invest: 5000, max_invest: 50000, return_percent: 30, duration_type: 'weekly', is_active: true },
-  ]
+export const fetchPlans = createAsyncThunk('mmf/fetchPlans', async (_, thunkAPI) => {
+  try { return (await api.get('/api/mmf/plans')).data }
+  catch (e) { return thunkAPI.rejectWithValue(e.response?.data?.message || 'Failed') }
 })
 
-export const invest = createAsyncThunk('mmf/invest', async (d) => {
-  return { id: Date.now(), plan_name: 'Bronze', amount: d.amount, return_percent: 10, status: 'active', start_date: new Date().toISOString(), maturity_date: new Date(Date.now() + 86400000).toISOString(), duration_type: '24h' }
+export const invest = createAsyncThunk('mmf/invest', async (data, thunkAPI) => {
+  try { return (await api.post('/api/mmf/invest', data)).data }
+  catch (e) { return thunkAPI.rejectWithValue(e.response?.data?.message || 'Investment failed') }
 })
 
-export const fetchInvestments = createAsyncThunk('mmf/fetchInvestments', async () => {
-  return [
-    { id: 1, plan_name: 'Bronze', amount: 500, return_percent: 10, status: 'active', start_date: new Date().toISOString(), maturity_date: new Date(Date.now() + 86400000).toISOString(), duration_type: '24h' },
-  ]
+export const fetchInvestments = createAsyncThunk('mmf/fetchInvestments', async (_, thunkAPI) => {
+  try { return (await api.get('/api/mmf/investments')).data }
+  catch (e) { return thunkAPI.rejectWithValue(e.response?.data?.message || 'Failed') }
 })
 
 const mmfSlice = createSlice({
-  name: 'mmf', initialState, reducers: {},
+  name: 'mmf',
+  initialState,
+  reducers: {},
   extraReducers: (b) => {
-    b.addCase(fetchPlans.fulfilled, (s, a) => { s.plans = a.payload })
-    b.addCase(invest.fulfilled, (s, a) => { s.activeInvestments.push(a.payload) })
+    b.addCase(fetchPlans.pending, (s) => { s.isLoading = true })
+    b.addCase(fetchPlans.fulfilled, (s, a) => {
+      s.isLoading = false
+      s.plans = a.payload.plans || a.payload
+    })
+    b.addCase(fetchPlans.rejected, (s) => { s.isLoading = false })
+
+    b.addCase(invest.fulfilled, (s, a) => {
+      s.activeInvestments.push(a.payload)
+    })
+
     b.addCase(fetchInvestments.fulfilled, (s, a) => {
-      s.investments = a.payload
-      s.activeInvestments = a.payload.filter(i => i.status === 'active')
+      const list = a.payload.investments || a.payload
+      s.investments = list
+      s.activeInvestments = list.filter(i => i.status === 'active')
     })
   },
 })

@@ -13,7 +13,9 @@ const liveFeedSlice = createSlice({
     addFeedItem: (s, a) => { s.feed.unshift(a.payload); if (s.feed.length > 20) s.feed.pop() }
   },
   extraReducers: (b) => {
-    b.addCase(fetchLiveFeed.fulfilled, (s, a) => { s.feed = a.payload })
+    b.addCase(fetchLiveFeed.fulfilled, (s, a) => {
+      s.feed = a.payload.feed || a.payload
+    })
   },
 })
 

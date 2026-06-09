@@ -2,14 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { userService } from '../../services/userService'
 
 const initialState = {
-  profile: {
-    email: 'demo@earnflow.com',
-    promo_code: 'DEMO123',
-    mpesa_withdrawal_number: '0712345678',
-    kyc_status: 'pending',
-    selfie_url: '',
-    created_at: new Date(Date.now() - 2592000000).toISOString(),
-  },
+  profile: null,
   kycStatus: 'pending',
   isLoading: false,
   isError: false,
